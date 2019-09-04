@@ -15,16 +15,18 @@
  */
 package com.alibaba.csp.sentinel.dashboard.datasource.entity.rule;
 
-import java.util.Date;
-
 import com.alibaba.csp.sentinel.slots.block.AbstractRule;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
+import java.util.Date;
 
 /**
  * @author Eric Zhao
  * @since 0.2.1
  */
 public abstract class AbstractRuleEntity<T extends AbstractRule> implements RuleEntity {
-
+    @JsonSerialize(using=ToStringSerializer.class)
     protected Long id;
 
     protected String app;

@@ -22,7 +22,6 @@ import com.alibaba.csp.sentinel.dashboard.client.CommandNotFoundException;
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.SentinelVersion;
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.ParamFlowRuleEntity;
 import com.alibaba.csp.sentinel.dashboard.discovery.AppManagement;
-import com.alibaba.csp.sentinel.dashboard.discovery.MachineInfo;
 import com.alibaba.csp.sentinel.dashboard.domain.Result;
 import com.alibaba.csp.sentinel.dashboard.repository.rule.RuleRepository;
 import com.alibaba.csp.sentinel.dashboard.rule.DynamicRuleProvider;
@@ -269,7 +268,8 @@ public class ParamFlowRuleControllerV2 {
     }
 
     private void publishRules(String app, String ip, Integer port) throws Exception {
-        List<ParamFlowRuleEntity> rules = repository.findAllByMachine(MachineInfo.of(app,ip,port));
+//        List<ParamFlowRuleEntity> rules = repository.findAllByMachine(MachineInfo.of(app,ip,port));
+        List<ParamFlowRuleEntity> rules = repository.findAllByApp(app);
         publisher.publish(app,rules);
     }
 

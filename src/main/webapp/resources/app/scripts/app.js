@@ -107,21 +107,21 @@ angular
         }
       })
 
-      .state('dashboard.flowV1', {
-        templateUrl: 'app/views/flow_v1.html',
-        url: '/flow/:app',
-        controller: 'FlowControllerV1',
-        resolve: {
-          loadMyFiles: ['$ocLazyLoad', function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sentinelDashboardApp',
-              files: [
-                'app/scripts/controllers/flow_v1.js',
-              ]
-            });
-          }]
-        }
-      })
+      // .state('dashboard.flowV1', {
+      //   templateUrl: 'app/views/flow_v1.html',
+      //   url: '/flow/:app',
+      //   controller: 'FlowControllerV1',
+      //   resolve: {
+      //     loadMyFiles: ['$ocLazyLoad', function ($ocLazyLoad) {
+      //       return $ocLazyLoad.load({
+      //         name: 'sentinelDashboardApp',
+      //         files: [
+      //           'app/scripts/controllers/flow_v1.js',
+      //         ]
+      //       });
+      //     }]
+      //   }
+      // })
 
         .state('dashboard.flow', {
             templateUrl: 'app/views/flow_v2.html',
