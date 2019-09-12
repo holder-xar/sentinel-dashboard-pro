@@ -12,7 +12,6 @@ import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -37,9 +36,8 @@ public class ZookeeperConfig {
     private static final int RETRY_TIMES = 3;
     private static final int SLEEP_TIME = 3000;
 
-    @Value("${zookeeper.remoteAddress}")
-    public String remoteAddress;
 
+    public String remoteAddress = System.getProperty("sentinel.zookeeper.address","127.0.0.1:2181");
 
 
     @Bean
