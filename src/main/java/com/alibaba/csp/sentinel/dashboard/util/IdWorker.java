@@ -162,6 +162,11 @@ public class IdWorker {
     public static void main(String[] args) {
         IdWorker idWorker = new IdWorker(1L,1L);
 
+        System.out.println(idWorker.nextId());
+
+        //32365039348486144
+        //32365101575180288
+
         /*Stream
                 .iterate(0 ,i -> i+1)
                 .limit(10)

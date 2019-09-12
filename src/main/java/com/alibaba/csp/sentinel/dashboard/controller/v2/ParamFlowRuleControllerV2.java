@@ -152,6 +152,7 @@ public class ParamFlowRuleControllerV2 {
         entity.setGmtModified(date);
         try {
             entity = repository.save(entity);
+            logger.warn("Create new ParamFlowRule [{}]",entity.toString());
             publishRules(entity.getApp(),entity.getIp(),entity.getPort());
             return Result.ofSuccess(entity);
         } catch (ExecutionException ex) {
@@ -204,10 +205,12 @@ public class ParamFlowRuleControllerV2 {
                                                               @RequestBody ParamFlowRuleEntity entity) {
         AuthUser authUser = authService.getAuthUser(request);
         if (id == null || id <= 0) {
+            logger.warn("Update ParamFlowRuleEntity Failed,with Invalid id [{}]",id);
             return Result.ofFail(-1, "Invalid id");
         }
         ParamFlowRuleEntity oldEntity = repository.findById(id);
         if (oldEntity == null) {
+            logger.warn("Update ParamFlowRuleEntity Failed,with id [{}] does not exist",id);
             return Result.ofFail(-1, "id " + id + " does not exist");
         }
         authUser.authTarget(oldEntity.getApp(), PrivilegeType.WRITE_RULE);
@@ -247,6 +250,7 @@ public class ParamFlowRuleControllerV2 {
         }
         ParamFlowRuleEntity oldEntity = repository.findById(id);
         if (oldEntity == null) {
+            logger.warn("Delete ParamFlowRuleEntity Failed,with id [{}] does not exist",id);
             return Result.ofSuccess(null);
         }
         authUser.authTarget(oldEntity.getApp(), PrivilegeType.DELETE_RULE);

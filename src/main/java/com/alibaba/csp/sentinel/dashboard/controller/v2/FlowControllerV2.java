@@ -168,10 +168,12 @@ public class FlowControllerV2 {
                                                     @RequestBody FlowRuleEntity entity) {
         AuthUser authUser = authService.getAuthUser(request);
         if (id == null || id <= 0) {
+            logger.warn("Update FlowRuleEntity Failed,with Invalid id [{}]",id);
             return Result.ofFail(-1, "Invalid id");
         }
         FlowRuleEntity oldEntity = repository.findById(id);
         if (oldEntity == null) {
+            logger.warn("Update FlowRuleEntity Failed,with id [{}] does not exist",id);
             return Result.ofFail(-1, "id " + id + " does not exist");
         }
         if (entity == null) {
@@ -208,10 +210,12 @@ public class FlowControllerV2 {
     public Result<Long> apiDeleteRule(HttpServletRequest request, @PathVariable("id") Long id) {
         AuthUser authUser = authService.getAuthUser(request);
         if (id == null || id <= 0) {
+            logger.warn("Delete FlowRuleEntity Failed,with Invalid id [{}]",id);
             return Result.ofFail(-1, "Invalid id");
         }
         FlowRuleEntity oldEntity = repository.findById(id);
         if (oldEntity == null) {
+            logger.warn("Delete FlowRuleEntity Failed,with id [{}] does not exist",id);
             return Result.ofSuccess(null);
         }
         authUser.authTarget(oldEntity.getApp(), PrivilegeType.DELETE_RULE);
